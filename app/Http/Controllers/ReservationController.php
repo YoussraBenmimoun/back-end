@@ -65,4 +65,32 @@ class ReservationController extends Controller
         }
         return response()->json(['message'=>'Pas de table disponible']);
     }
+
+    public function storeTableHotel(Request $request)
+{
+    $rooms = Room::where('room_type_id', $request->room_type_id)
+                ->where('nbr_beds', '>=', $request->nbr_beds)
+                ->get();
+
+    foreach ($rooms as $room) {
+        $reservationExists = Reservation::where('room_id', $room->id)
+                                        ->where('start_date', '<=', $request->end_date)
+                                        ->where('end_date', '>=', $request->start_date)
+                                        ->exists();
+
+        if (!$reservationExists) {
+            Reservation::create([
+                'room_id' => $room->id,
+                'start_date' => $request->start_date,
+                'end_date' => $request->end_date,
+                'client_id' => auth()->id(),
+            ]);
+
+            return response()->json(['message' => 'Réservation ajoutée']);
+        }
+    }
+
+    return response()->json(['message' => 'Pas de room disponible']);
+}
+
 }

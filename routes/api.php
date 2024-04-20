@@ -13,6 +13,8 @@ use App\Http\Controllers\CbrandController;
 use App\Http\Controllers\CmodelController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\HotelController;
+use App\Http\Controllers\RoomtypeController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -42,3 +44,10 @@ Route::get('/restaurants/{id}', [RestaurantController::class,"show"]);
 Route::post('/reservations', [RestaurantController::class,"store"]);
 Route::post('/reservations/store_table',[ReservationController::class,'storeTableReservation']);
 
+Route::get('/hotels', [HotelController::class, 'index']);
+Route::get('hotels/hotel_offers',[HotelController::class,'hotel_offers']);
+Route::get('hotels/{id}',[HotelController::class,'show']);
+Route::get('/roomtypes/name', [RoomtypeController::class, 'index']);
+// Route::get('/roomtypes/get', [RoomtypeController::class, 'getRoomTypes']);
+Route::get('/hotels', [HotelController::class, 'getHotelsByStars']);
+Route::post('/reservation/storeTableHotel', [ReservationController::class, 'storeTableHotel']);

@@ -15,6 +15,10 @@ use App\Models\Offer;
 use App\Models\Restaurant;
 use App\Models\Table;
 use App\Models\User;
+use App\Models\Room;
+use App\Models\Roomtype;
+use App\Models\Hotel;
+
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -274,6 +278,17 @@ class DatabaseSeeder extends Seeder
                 'host_id' => 1,
                 'restaurant_id' => 4
             ],
+            [
+                'description' => "description",
+                'type' => 'hotel',
+                'host_id' => 1,
+                'hotel_id' => 1
+            ],            [
+                'description' => "description",
+                'type' => 'hotel',
+                'host_id' => 1,
+                'hotel_id' => 2
+            ],
             
         ];
 
@@ -334,6 +349,52 @@ class DatabaseSeeder extends Seeder
 
         foreach ($tablesData as $tableData) {
             Table::create($tableData);
+        }
+
+        $hotels = [
+            [
+                'name' => 'Hilton Tanger City Center Hotel & Residences',
+                'address' => ' Tanger City Center Place du Maghreb, 90000 Tangier, Morocco',
+                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                'nbr_stars' => 5,
+                'latitude' => 51.5074, 
+                'longitude' => -0.1278, 
+                'city_id' => 1,
+            ],
+            [
+                'name' => 'Royal Tulip City Center',
+                'address' => ' Tanger City Center Place du Maghreb, 90000 Tangier, Morocco ',
+                'description' => 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                'nbr_stars' => 5,
+                'latitude' => 40.7128,
+                'longitude' => -74.0060,
+                'city_id' => 2, 
+            ],
+           
+        ];
+
+       
+        foreach ($hotels as $hotelData) {
+            Hotel::insert($hotelData);
+        }
+
+        $roomtypes=[
+            ['name' =>'suite'],
+            ['name' => 'familly room']
+        ];
+
+        foreach($roomtypes as $roomtypeData){
+            RoomType::insert($roomtypeData);
+        }
+
+        $room=[
+            ['nbr_beds' => 3, 'price_per_night' => '140.00', 'description'=> 'suite', 'hotel_id'=>1, 'roomtype_id'=>1],
+            ['nbr_beds' => 1, 'price_per_night' => '70.00', 'description'=> 'familly', 'hotel_id'=>2, 'roomtype_id'=>2],
+
+                      
+        ];
+        foreach($room as $roomData){
+            Room::insert($roomData);
         }
     }
 }
