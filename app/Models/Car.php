@@ -13,7 +13,7 @@ class Car extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['price_per_day','production_date','fuel','nbr_places','description'];
+    protected $fillable = ['price_per_day','production_date','fuel','nbr_places','description','cmodel_id','city_id'];
 
     public function cmodel() {
         return $this->belongsTo(Cmodel::class);
@@ -26,7 +26,7 @@ class Car extends Model
     public function reservations(){
         return $this->hasMany(Reservation::class);
     }
-    
+
     public function city(){
         return $this->belongsTo(City::class);
     }

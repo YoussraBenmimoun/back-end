@@ -15,12 +15,11 @@ return new class extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
-            $table->date('start_date')->nullable();
-            $table->date('end_date')->nullable();
+            $table->dateTime('start_date')->nullable();
+            $table->dateTime('end_date')->nullable();
             $table->date('reservation_date_restaurant')->nullable();
-            $table->string('car_pick_up_location')->nullable();
-            $table->string('car_drop_off_location')->nullable();
             $table->integer('nbr_people')->nullable();
+
             $table->boolean('billed')->default(false);
             $table->timestamps();
             $table->UnsignedBigInteger('car_id')->nullable();

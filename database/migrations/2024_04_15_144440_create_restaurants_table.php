@@ -15,9 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
-            $table->integer('nbr_tables');
-            $table->decimal('latitude', 10, 7)->nullable(); 
-            $table->decimal('longitude', 10, 7)->nullable();
+            $table->string('address');
+            $table->integer('nbr_tables')->nullable();
             $table->timestamps();
 
             $table->unsignedBigInteger('cuisine_id');

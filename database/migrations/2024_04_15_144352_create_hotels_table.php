@@ -17,8 +17,6 @@ return new class extends Migration
             $table->string('address');
             $table->string('description');
             $table->integer('nbr_stars');
-            $table->decimal('latitude', 10, 7); 
-            $table->decimal('longitude', 10, 7);
             $table->timestamps();
             $table->unsignedBigInteger('city_id');
             $table->foreign('city_id')->references('id')->on('cities');

@@ -16,7 +16,7 @@ class Offer extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['type'];
+    protected $fillable = ['description','type',"restaurant_id",'host_id','car_id','tour_id','hotel_id','restaurant_id'];
 
 
     public function host(){
@@ -50,5 +50,9 @@ class Offer extends Model
     public function images()
     {
         return $this->hasMany(Image::class);
+    }
+
+    public function reviews() {
+        return $this->hasMany(Review::class);
     }
 }

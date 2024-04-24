@@ -18,6 +18,8 @@ use App\Models\Cmodel;
 use App\Models\Cuisine;
 use App\Models\Roomtype;
 use App\Models\Restaurant;
+use App\Models\Tour;
+use App\Models\Reservation;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -200,6 +202,7 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Pallermo',
                 'description' => '............................',
                 'nbr_tables' => 16,
+                'address'=>'address',
                 'cuisine_id' => 2,
                 'city_id' => 1
             ],
@@ -207,6 +210,7 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Chihuahua',
                 'description' => '............................',
                 'nbr_tables' => 18,
+                'address'=>'address',
                 'cuisine_id' => 4,
                 'city_id' => 1
             ],
@@ -214,6 +218,7 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Dar Naji',
                 'description' => '............................',
                 'nbr_tables' => 20,
+                'address'=>'address',
                 'cuisine_id' => 1,
                 'city_id' => 2
             ],
@@ -221,6 +226,7 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Dar Tazi',
                 'description' => '............................',
                 'nbr_tables' => 24,
+                'address'=>'address',
                 'cuisine_id' => 1,
                 'city_id' => 2
             ],
@@ -239,8 +245,6 @@ class DatabaseSeeder extends Seeder
                 'address' => ' Tanger City Center Place du Maghreb, 90000 Tangier, Morocco',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
                 'nbr_stars' => 5,
-                'latitude' => 51.5074,
-                'longitude' => -0.1278,
                 'city_id' => 1,
             ],
             [
@@ -248,8 +252,6 @@ class DatabaseSeeder extends Seeder
                 'address' => ' Rte de Malabata, Tanger 90000, Morocco ',
                 'description' => 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
                 'nbr_stars' => 5,
-                'latitude' => 40.7128,
-                'longitude' => -74.0060,
                 'city_id' => 1,
             ],
             [
@@ -257,8 +259,6 @@ class DatabaseSeeder extends Seeder
                 'address' => ' PLACE 16 NOVEMBRE, Bd Mohamed Lyazidi, Rabat 10000, Morocco',
                 'description' => 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
                 'nbr_stars' => 5,
-                'latitude' => 40.7128,
-                'longitude' => -74.0060,
                 'city_id' => 2,
             ],
             [
@@ -266,8 +266,6 @@ class DatabaseSeeder extends Seeder
                 'address' => ' Av. Echouhada, Marrakech 40000, Morocco',
                 'description' => 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
                 'nbr_stars' => 5,
-                'latitude' => 40.7128,
-                'longitude' => -74.0060,
                 'city_id' => 3,
             ],
 
@@ -367,6 +365,21 @@ class DatabaseSeeder extends Seeder
                 'type' => 'hotel',
                 'host_id' => 1,
                 'hotel_id' => 4
+            ],
+            [
+                'type' => 'tour',
+                'host_id' => 1,
+                'tour_id' => 1
+            ],
+            [
+                'type' => 'tour',
+                'host_id' => 1,
+                'tour_id' => 1
+            ],
+            [
+                'type' => 'tour',
+                'host_id' => 1,
+                'tour_id' => 1
             ],
 
         ];
@@ -468,6 +481,26 @@ class DatabaseSeeder extends Seeder
 
         foreach ($tablesData as $tableData) {
             Table::create($tableData);
+        }
+        $tour=[
+            ['name'=>'sunset tour', 'description'=>'description', 'start_date'=>'2024-04-24', 'end_date'=>'2024-04-26', 'nbr_people'=>3, 'price_per_person'=> '140.00']
+
+        ];
+        foreach($tour as $tourData){
+            Tour::insert($tourData);
+        }
+        $reservation=[
+            ['start_date'=>'2024-04-19', 'end_date'=>'2024-05-01', 'room_id'=>1, 'client_id'=> 2, 'offer_id'=>8],
+            ['start_date'=>'2024-04-19', 'end_date'=>'2024-05-01', 'nbr_people'=> 4, 'tour_id'=>1, 'client_id'=>3, 'offer_id'=>12],
+            ['start_date'=>'2024-04-19', 'end_date'=>'2024-05-01', 'car_id'=> 1, 'client_id'=> 2, 'offer_id'=>1],
+            ['reservation_date_restaurant'=>'2024-07-12','table_id'=> 1, 'client_id'=> 4, 'offer_id'=>6],
+
+
+        ];
+
+        foreach($reservation as $reservationData){
+            Reservation::insert($reservationData);
+
         }
     }
 }

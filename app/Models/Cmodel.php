@@ -11,7 +11,7 @@ class Cmodel extends Model
 {
     use HasFactory;
 
-    protected $fillable=['name'];
+    protected $fillable=['name','cbrand_id'];
      
     public function cars(){
         return $this->hasMany(Car::class);

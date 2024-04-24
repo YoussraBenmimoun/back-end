@@ -28,7 +28,7 @@ class RestaurantController extends Controller
 
     public function restaurant_offers()
     {
-        $offers = Offer::whereNotNull('restaurant_id')->with('images')->get();
+        $offers = Offer::whereNotNull('restaurant_id')->with('images','host','reviews.client')->get();
         $restaurantsOf = [];
     
         foreach ($offers as $offer) {
@@ -45,7 +45,7 @@ class RestaurantController extends Controller
     
     public function show($id){
         $restaurant = Restaurant::with('city', 'cuisine')->findOrFail($id);
-        $offer = Offer::where('restaurant_id', $id)->with('images')->get();
+        $offer = Offer::where('restaurant_id', $id)->with('images','host','reviews.client')->get();
         $tables = Table::where('restaurant_id', $id)->distinct()->pluck('type');
         return response()->json(['restaurant' => $restaurant, 'offer' => $offer, 'tables' => $tables]);
     }

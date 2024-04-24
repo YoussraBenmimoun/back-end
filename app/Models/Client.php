@@ -10,7 +10,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Client extends Model
 {
     use HasFactory;
-    protected $fillable = ['first_name','last_name','address','telephone','birth_date'];
+    protected $fillable = [
+        'user_id', 
+        'first_name',
+        'last_name',
+        'email',
+        'birth_date',
+        'address',
+        'password',
+    ];
+
 
     public function user()
     {
@@ -19,5 +28,9 @@ class Client extends Model
     public function reservations()
     {
         return $this->hasMany(Reservation::class);
+    }
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
     }
 }

@@ -10,7 +10,7 @@ class Activity extends Model
 {
     use HasFactory;
 
-    protected $fillable=['name','description'];
+    protected $fillable=['name','description','tour_id'];
 
     public function tours(){
         return $this->belongsTo(Tour::class);

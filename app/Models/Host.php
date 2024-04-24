@@ -11,7 +11,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Host extends Model
 {
     use HasFactory;
-    protected $fillable = ['CIN','first_name','last_name','address','company_name','telephone','birth_date'];
+    protected $fillable = [
+        'user_id', 
+        'first_name',
+        'last_name',
+        'email',
+        'company_name',
+        'birth_date',
+        'address',
+        'CIN',
+        'password',
+    ];
 
     public function user()
     {

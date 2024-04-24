@@ -11,7 +11,7 @@ class Hotel extends Model
 {
     use HasFactory;
 
-    protected $fillable=['name','address','description','nbr_stars','latitude','longitude'];
+    protected $fillable=['name','address','description','nbr_stars','city_id'];
 
     public function offer(){
         return $this->hasOne(Offer::class);

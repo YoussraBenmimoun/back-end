@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\City;
 use Illuminate\Http\Request;
 use App\Models\Hotel;
 use App\Models\Offer;
@@ -16,7 +17,7 @@ class HotelController extends Controller
 
     public function hotel_offers()
     {
-        $offers = Offer::whereNotNull('hotel_id')->with('images')->get();
+        $offers = Offer::whereNotNull('hotel_id')->with('images','reviews.client','host')->get();
         $hotelsWithOffers = [];
         foreach ($offers as $offer) {
             $hotel = Hotel::find($offer->hotel_id);
@@ -39,8 +40,9 @@ class HotelController extends Controller
     {
         $hotel = Hotel::findOrFail($id);
         $hotel->load('rooms.roomtype');
-        $offer = Offer::where('hotel_id', $id)->with('images')->get();
-        return response()->json(['hotel' => $hotel, 'offer' => $offer]);
+        $offer = Offer::where('hotel_id', $id)->with('images','host','reviews.client')->get();
+        $city = City::find($hotel->city_id);
+        return response()->json(['hotel' => $hotel, 'offer' => $offer,'city'=>$city]);
     }
 
 

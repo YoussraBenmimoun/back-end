@@ -11,7 +11,7 @@ class Restaurant extends Model
 {
     use HasFactory;
 
-    protected $fillable=['name','description','nbr_places','latitude','longitude'];
+    protected $fillable=['name','description','cuisine_id','city_id','address','nbr_tables'];
 
     public function city(){
         return $this->belongsTo(City::class);
@@ -23,9 +23,5 @@ class Restaurant extends Model
 
     public function offer(){
         return $this->hasOne(Offer::class);
-    }
-
-    public function tables(){
-        return $this->hasMany(Table::class);
     }
 }

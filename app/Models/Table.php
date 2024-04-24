@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Table extends Model
 {
-    protected $fillable = ['type'];
+    protected $fillable = ['type','restaurant_id'];
     use HasFactory;
     public function restaurant(){
         return $this->belongsTo(Restaurant::class);

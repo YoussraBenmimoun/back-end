@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Car;
 use App\Models\Cbrand;
+use App\Models\City;
 use App\Models\Cmodel;
 use App\Models\Offer;
 use Illuminate\Http\Request;
@@ -19,7 +20,7 @@ class CarController extends Controller
 
     public function car_offers()
     {
-        $offers = Offer::whereNotNull('car_id')->with('images')->get();
+        $offers = Offer::whereNotNull('car_id')->with('images','host','reviews.client',)->get();
         $cars = [];
         foreach ($offers as $offer) {
             $car = Car::find($offer->car_id);
@@ -40,7 +41,14 @@ class CarController extends Controller
         $car = Car::findOrFail($id);
         $model = Cmodel::find($car->cmodel_id);
         $brand = Cbrand::find($model->cbrand_id);
-        $offer = Offer::where('car_id',$id)->with('images')->get();
-        return response()->json(['car'=>$car,'model'=> $model,'brand'=>$brand ,'offer'=>$offer]);
+        $city = City::find($car->city_id);
+        $offer = Offer::where('car_id',$id)->with('images','reviews.client','host')->get();
+        return response()->json(['car'=>$car,'city'=>$city,'model'=> $model,'brand'=>$brand ,'offer'=>$offer]);
+    }
+    public function getModelsOfBrands(Request $request)
+    {
+        $brandId = $request->input('brand_id');
+        $models = Cbrand::findOrFail($brandId)->models;
+        return response()->json(['models' => $models]);
     }
 }

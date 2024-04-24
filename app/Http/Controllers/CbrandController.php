@@ -11,4 +11,5 @@ class CbrandController extends Controller
         $brands = Cbrand::pluck('name');
         return response()->json(['brands'=>$brands]);
     }
+    
 }
