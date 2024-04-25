@@ -18,6 +18,16 @@ class ClientController extends Controller
         return response()->json($reservations);
     }
 
+    public function getClientId(Request $request)
+{
+    if ($request->user()) {
+        $clientId = $request->user()->id;
+        return response()->json(['id' => $clientId]);
+    } else {
+        return response()->json(['error' => 'Unauthenticated'], 401);
+    }
+}
+
     public function getReservationsByClientId($clientId)
     {
         \Log::info('Client ID:', ['id' => $clientId]);

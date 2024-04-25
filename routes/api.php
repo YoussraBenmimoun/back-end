@@ -70,6 +70,7 @@ Route::post("/host/registerH",[AuthHostController::class,"store"]);
 
 
 Route::get('reservations', [ClientController::class, 'index']);
+Route::get('client/client/id', [ClientController::class, 'getClientId']);
 Route::get('client/{clientId}/reservations', [ClientController::class, 'getReservationsByClientId']);
 Route::delete('reservations/{clientId}', [ClientController::class, 'deleteReservation']);
 Route::put('reservations/{editReservationId}/update', [ReservationController::class, 'update']);

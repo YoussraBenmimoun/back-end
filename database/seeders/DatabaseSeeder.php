@@ -137,6 +137,31 @@ class DatabaseSeeder extends Seeder
                 'type' => 'host',
                 'status' => 0
             ],
+            [
+                'image' => '',
+                'email' => 'yas.benmimou@gmail.com',
+                'password' => '123',
+                'type' => 'client',
+                'status' => 0
+            ],            [
+                'image' => '',
+                'email' => 'min.benmimou@gmail.com',
+                'password' => '456',
+                'type' => 'client',
+                'status' => 0
+            ],            [
+                'image' => '',
+                'email' => 'yaya.benmimou@gmail.com',
+                'password' => '678',
+                'type' => 'client',
+                'status' => 0
+            ],            [
+                'image' => '',
+                'email' => 'yoyo.benmimou@gmail.com',
+                'password' => '789',
+                'type' => 'client',
+                'status' => 0
+            ],
 
         ];
 
@@ -169,7 +194,39 @@ class DatabaseSeeder extends Seeder
                 'telephone' => '0123456789',
                 'birth_date' => '1998-08-11',
                 'user_id' => 2
-            ]
+            ],
+            [
+                'first_name' => 'Yas',
+                'last_name' => 'Ben',
+                'address' => 'bit',
+                'telephone' => '0123006789',
+                'birth_date' => '1998-08-11',
+                'user_id' => 3
+            ],            [
+                'first_name' => 'ben',
+                'last_name' => 'yas',
+                'address' => 'bit',
+                'telephone' => '0123006089',
+                'birth_date' => '1998-08-11',
+                'user_id' => 4
+            ], 
+            [
+                'first_name' => 'Tata',
+                'last_name' => 'Ben',
+                'address' => 'bit',
+                'telephone' => '0153006789',
+                'birth_date' => '1998-08-11',
+                'user_id' => 5
+            ],
+            [
+                'first_name' => 'has',
+                'last_name' => 'Ben',
+                'address' => 'bit',
+                'telephone' => '0123006788',
+                'birth_date' => '1998-08-11',
+                'user_id' => 6
+            ],
+
 
         ];
 
