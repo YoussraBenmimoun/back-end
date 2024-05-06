@@ -13,14 +13,7 @@ class Host extends Model
     use HasFactory;
     protected $fillable = [
         'user_id', 
-        'first_name',
-        'last_name',
-        'email',
-        'company_name',
-        'birth_date',
-        'address',
         'CIN',
-        'password',
     ];
 
     public function user()

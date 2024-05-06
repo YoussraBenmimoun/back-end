@@ -59,11 +59,11 @@ class RestaurantController extends Controller
         
         return response()->json(['tableTypes' => $tableTypes]);
     }
-    public function getCities(){
-        $cities = City::pluck('name');
+    // public function getCities(){
+    //     $cities = City::pluck('name');
     
-        return response()->json(['cities' => $cities]);
-    }
+    //     return response()->json(['cities' => $cities]);
+    // }
     public function getCuisine(){
         $cuisine= Cuisine::pluck('name');
         return response()->json(['cuisine' => $cuisine]);

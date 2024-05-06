@@ -12,6 +12,29 @@ use Illuminate\Http\Response;
 
 class ReservationController extends Controller
 {
+
+    public function deleteReservation($reservationId)
+    {
+        $reservation = Reservation::find($reservationId);
+        if (!$reservation) {
+            return response()->json(['error' => 'Reservation not found'], 404);
+        }
+        $reservation->delete();
+
+        return response()->json(['message' => 'Reservation deleted successfully']);
+    }
+
+
+    public function getReservationsByOffer($offerId)
+    {
+        $reservations = Reservation::where('offer_id', $offerId)->get();
+
+        return response()->json($reservations);
+    }
+
+
+
+    
     public function storeCarReservation(Request $request)
     {
         $id = $request->id;

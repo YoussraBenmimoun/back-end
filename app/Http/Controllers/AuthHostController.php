@@ -144,13 +144,13 @@ class AuthHostController extends Controller
     return response()->json(['message' => 'Host account deleted successfully']);
 }
 
-public function logout(Request $request)
-{
-    Auth::guard('host')->logout();
+// public function logout(Request $request)
+// {
+//     Auth::guard('host')->logout();
 
-    $request->session()->invalidate();
+//     $request->session()->invalidate();
 
-    return redirect('/');
-}
+//     return redirect('/');
+// }
 
 }

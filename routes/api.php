@@ -22,10 +22,38 @@ use App\Http\Controllers\TourController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\AuthHostController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ProfileController;
 
+
+
+Route::post('/login',[AuthController::class, "login"]);
+Route::post('/register', [AuthController::class, "register"]);
+
+Route::get('/test', function () {
+    \Log::info('Test route accessed');
+    dd('Test route accessed');
+    return 'Test route';
+});
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+;
+
+
+// Route::get('/profile/{id}', [ProfilesController::class, 'show']);
+// Route::get('/profile/{id}/edit', [ProfilesController::class, 'edit']);
+// Route::put('/profile/{id}', [ProfilesController::class, 'update']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    
+    Route::post('/logout', [AuthController::class, "logout"]);
+
+
+});
+
+Route::get('offer/{offerId}/reservations', [ReservationController::class, 'getReservationsByOffer']);
+Route::delete('/reservations/{reservationId}', [ReservationController::class, 'deleteReservation']);
+Route::get('/client/offerId', [ClientController::class, 'getOfferId']);
 
 
 Route::get('/offers/{id}', [OfferController::class,"index"]);
@@ -71,16 +99,15 @@ Route::post("/host/registerH",[AuthHostController::class,"store"]);
 
 Route::get('reservations', [ClientController::class, 'index']);
 Route::get('client/client/id', [ClientController::class, 'getClientId']);
-Route::get('client/{clientId}/reservations', [ClientController::class, 'getReservationsByClientId']);
-Route::delete('reservations/{clientId}', [ClientController::class, 'deleteReservation']);
-Route::put('reservations/{editReservationId}/update', [ReservationController::class, 'update']);
+// Route::get('client/{clientId}/reservations', [ClientController::class, 'getReservationsByClientId']);
+// Route::delete('reservations/{clientId}', [ClientController::class, 'deleteReservation']);
+// Route::put('reservations/{editReservationId}/update', [ReservationController::class, 'update']);
 
 
-Route::post("/register", [AuthController::class, "register"]);
-Route::post("/login", [AuthController::class, "login"]);
-Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/logout', [AuthController::class, "logout"]);
-});
+
+
+Route::get('/users/{id}/show', [UserController::class, 'show']);
+Route::put('/users/{id}/update', [UserController::class, 'update']);
 
 Route::get('bills', [BillController::class, 'event']);
 
@@ -128,8 +155,8 @@ Route::post('/reservations/store_tour', [ReservationController::class, 'storeTou
 
 Route::post("/host/registerH",[\App\Http\Controllers\AuthHostController::class,"store"]);
 
-Route::post("/register",[\App\Http\Controllers\AuthController::class,"register"]);
-Route::post("/login",[\App\Http\Controllers\AuthController::class,"login"]);
-Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/logout', [AuthController::class, "logout"]);
-});
+// Route::post("/register",[\App\Http\Controllers\AuthController::class,"register"]);
+// Route::post("/login",[\App\Http\Controllers\AuthController::class,"login"]);
+// Route::middleware('auth:sanctum')->group(function () {
+//     Route::post('/logout', [AuthController::class, "logout"]);
+// });

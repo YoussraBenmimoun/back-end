@@ -18,23 +18,25 @@ class ClientController extends Controller
         return response()->json($reservations);
     }
 
-    public function getClientId(Request $request)
-{
-    if ($request->user()) {
-        $clientId = $request->user()->id;
-        return response()->json(['id' => $clientId]);
-    } else {
-        return response()->json(['error' => 'Unauthenticated'], 401);
-    }
-}
-
-    public function getReservationsByClientId($clientId)
+    public function getOfferId()
     {
-        \Log::info('Client ID:', ['id' => $clientId]);
-        $reservations = Reservation::where('client_id', $clientId)->get();
-        \Log::info('Reservations:', $reservations->toArray());
-        return response()->json($reservations);
+        $host = auth()->user();
+    
+        if (!$host) {
+            return response()->json(['error' => 'Unauthenticated'], 401);
+        }
+        $hostId = $host->id;
+        $host = Host::where('user_id', $hostId)->first();
+
+        if (!$host) {
+            return response()->json(['error' => 'Host not found'], 404);
+        }
+    
+        $offerId = $host->offer_id;
+    
+        return response()->json(['offer_id' => $offerId]);
     }
+    
 
     public function store(Request $request)
     {
@@ -109,29 +111,5 @@ public function destroy($id)
     return response()->json(['message' => 'Client account deleted successfully']);
 }
 
-public function logout(Request $request)
-{
-    Auth::guard('client')->logout();
-
-    $request->session()->invalidate();
-
-    return redirect('/');
-}
-public function deleteReservation($reservationId)
-    {
-        $reservation = Reservation::find($reservationId);
-
-        if (!$reservation) {
-            return response()->json(['error' => 'Reservation not found'], 404);
-        }
-
-        // if ($reservation->client_id !== auth()->user()->id) {
-        //     return response()->json(['error' => 'Unauthorized'], 403);
-        // }
-
-        $reservation->delete();
-
-        return response()->json(['message' => 'Reservation deleted successfully']);
-    }
 
 }

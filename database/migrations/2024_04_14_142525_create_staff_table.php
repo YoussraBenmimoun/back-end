@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('role');
-            $table->integer('telephone');
+            $table->string('telephone');
             $table->timestamps();
 
             $table->unsignedBigInteger('tour_id');
